@@ -1,0 +1,59 @@
+{
+  "name": "resume-2017",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "npm run watch & npm run browser-sync",
+    "browser-sync": "cd build && browser-sync start -s -f *.html *.css *.js",
+    "vue": "browserify -t vueify -e src/*.js -o build/bundle.js",
+    "vue:watch": "nodemon -e vue,js --ignore build/ --exec 'npm run vue'",
+    "vue:dist": "npm run vue && uglifyjs build/bundle.js -o dist/bundle.js",
+    "css": "cp src/style.css build/style.css",
+    "css:watch": "nodemon -e css --ignore build/ --exec 'npm run css'",
+    "css:dist": "npm run css && cp build/style.css dist/style.css",
+    "html": "cp src/index.html build/index.html",
+    "html:watch": "nodemon -e html --ignore build/ --exec 'npm run html'",
+    "html:dist": "npm run html && cp build/index.html dist/index.html",
+    "watch": "npm run vue:watch & npm run css:watch & npm run html:watch",
+    "build": "npm run vue & npm run css & npm run html",
+    "dist": "npm run css:dist & npm run vue:dist & npm run html:dist"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ],
+          "extensions": [
+            ".js",
+            ".vue"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "browserify": "^14.5.0",
+    "nodemon": "^1.12.1",
+    "vueify": "^9.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.5.0",
+    "nodemon": "^1.12.1",
+    "tinymce-vue-2": "0.0.5",
+    "uglifyjs": "^2.4.11",
+    "vue": "^2.5.2",
+    "vue-sortable": "^0.1.3",
+    "vue-tinymce": "^1.0.5",
+    "vueify": "^9.4.1"
+  }
+}
