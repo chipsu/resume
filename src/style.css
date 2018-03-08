@@ -13,13 +13,20 @@
   --ms-5: 0.328em;
   --ms-6: 0.262em;
 
-  --color-black: #000;
+  --color-light: #eee;
+  --color-dark: #111;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  appearance: none;
+}
+
+a {
+  color: darkmagenta;
+  transition: color 0.3s;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -44,7 +51,6 @@ h3 + h4 {
 
 h1 {
   font-size: var(--ms6);
-  text-transform: uppercase;
 }
 
 h2 {
@@ -69,7 +75,6 @@ ul {
 }
 
 .sans {
-  font-family: 'Muli', sans-serif;
   font-family: 'Noto+Sans', sans-serif;
 }
 
@@ -77,12 +82,16 @@ ul {
   font-family: 'Spectral SC', serif;
 }
 
-.raleway {
-  font-family: 'Raleway', sans-serif;
-}
-
 .lh1 {
   line-height: 1.25;
+}
+
+.ls1 {
+  letter-spacing: .086em;
+}
+
+.upper {
+  text-transform: uppercase;
 }
 
 .flex {
@@ -146,6 +155,11 @@ ul {
   padding: 1em;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mx-05 {
   margin-left: -0.5em;
   margin-right: -0.5em;
@@ -168,6 +182,11 @@ ul {
 .px2 {
   padding-left: 2em;
   padding-right: 2em;
+}
+
+.py4 {
+  padding-top: 4em;
+  padding-bottom: 4em;
 }
 
 .l0 {
@@ -210,24 +229,36 @@ ul {
   max-width: 100%;
 }
 
-.fc-white {
-  color: #fff;
+.mw60 {
+  max-width: 60rem;
 }
 
-.fc-white-transparent-1 {
-  color: rgba(255,255,255, 0.9);
+.fc-light {
+  color: var(--color-light);
 }
 
-.fc-black {
-  color: var(--color-black);
+.fc-dark {
+  color: var(--color-dark);
 }
 
-.bc-white {
-  background-color: #fff;
+.bc-light {
+  background-color: var(--color-light);
 }
 
-.bc-black {
-  background-color: var(--color-black);
+.bc-dark {
+  background-color: var(--color-dark);
+}
+
+.bc-darker {
+  background-color: #000;
+}
+
+.fill-light {
+  fill: var(--color-light);
+}
+
+.fill-dark {
+  fill: var(--color-dark);
 }
 
 /* Scale 1.001 for subpixel panning in Firefox */
