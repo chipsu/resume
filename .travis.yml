@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+- 8.9.4
+before_script:
+- npm install
+script:
+- npm run build
+after_success:
+- if [ "$TRAVIS_BRANCH" == "master" ]; then
+  npm run build;
+  docker build -t $DOCKER_USERNAME/resume .;
+  docker tag $DOCKER_USERNAME/resume $DOCKER_USERNAME/resume:$(git rev-parse --short HEAD);
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  docker push $DOCKER_USERNAME/resume;
+  fi
+env:
+  global:
+  - DOCKER_USERNAME=chipu
+  - secure: iyWZUxorhuynEkFeMJi2Tr1u5F3yGqLyht9bWJx31Zf585NqNKPxLNrPV+jtdiObwCJUbtx5q8sh6e+t6FBlSLYff52hd2idvvlt9Xm8DK3mf4MQ3czEfYxfGSh6ofEiNOhYdBMY3s6RGhCurgQhYRE2VZi5CrcAytBU2ZzjS3Np8hr0Aec6OjgE9UvkhCSLFXoz+SJW/KW4B4mDCtvFe1i7p38r26g7c9CWcWCOfDpKA4qpmJ2h6yY7YO8j4XRHC6QAj0eNsJDYUXyRoUJNW/rd0O6ETHaAxUyDpefEmRc1zIv+JR8F1MhmoTdmBvItmgKJSjPYLUzosQ6iQOrTW5TKov57lHaHO1ITWHYDpHR7hfmOykUy10q+Bn3lrgx+P24eT7piyeHLgatSPBY+hOy+pZwJiOwK0FtX9eEu9AwKKFm9FAbQTJy7UeCicptfB6xjzpBXMx+YTOjjdDxGrlazAJ5sd93cqJN22uqxWLrPBfk1GrAABWEHWUicm/KPHVSfV+C5oqPxbcKa2JN4ZhD6avP0k7HXt5BFTvRnsnZHHo4vVdXt1jUPeaSNVp/AF/4v7StJXxvSb0od5EwH8/n/GB24SKfB6IH3FYVM6FPNZ/6TbGbkiGrgjVRXm75DJGhBmCfFQbIYgMqP81IUwGDoPhWLsQCEPoMFxw+Hxeo=
