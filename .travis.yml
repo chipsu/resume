@@ -12,9 +12,9 @@ after_success:
   COMPOSE_FILE=docker-compose.yml;
   RANCHER_STACK=http-resume;
   if [[ -f docker-compose-$TRAVIS_BRANCH.yml ]]; then
-    COMPOSE_FILE=docker-compose-$TRAVIS_BRANCH.yml
-    RANCHER_STACK=http-resume-$TRAVIS_BRANCH
-  fi
+  COMPOSE_FILE=docker-compose-$TRAVIS_BRANCH.yml;
+  RANCHER_STACK=http-resume-$TRAVIS_BRANCH;
+  fi;
   npm run build;
   docker build -t $DOCKER_USERNAME/resume .;
   docker tag $DOCKER_USERNAME/resume $DOCKER_USERNAME/resume:$(git rev-parse --short HEAD);
