@@ -9,7 +9,7 @@ script:
 - npm run build
 after_success:
 - if [[ " master stage " =~ .*\ $TRAVIS_BRANCH\ .* ]]; then
-  PROJECT=http-resume-$TRAVIS_BRANCH
+  PROJECT=http-resume-$TRAVIS_BRANCH;
   npm run build;
   docker build -t $DOCKER_USERNAME/resume .;
   docker tag $DOCKER_USERNAME/resume $DOCKER_USERNAME/resume:$(git rev-parse --short HEAD);
