@@ -8,16 +8,18 @@ before_script:
 script:
 - npm run build
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then
+- if [[ " master stage " =~ .*\ $TRAVIS_BRANCH\ .* ]]; then
+  PROJECT=http-resume-$TRAVIS_BRANCH
   npm run build;
   docker build -t $DOCKER_USERNAME/resume .;
   docker tag $DOCKER_USERNAME/resume $DOCKER_USERNAME/resume:$(git rev-parse --short HEAD);
+  docker tag $DOCKER_USERNAME/resume $DOCKER_USERNAME/resume:$TRAVIS_BRANCH;
   docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   docker push $DOCKER_USERNAME/resume;
   wget -qO- https://github.com/rancher/rancher-compose/releases/download/v0.12.5/rancher-compose-linux-amd64-v0.12.5.tar.xz | tar -xvJ --strip=2
-  ./rancher-compose -p http-resume up -d --upgrade
-  #todo: tests or rancher-compose -p up http-resume -d --rollback
-  #todo: if ok: rancher-compose -p up http-resume -d --confirm-upgrade
+  ./rancher-compose -p $PROJECT up pull --upgrade -d
+  #todo: tests or rancher-compose up -p $PROJECT -d --rollback
+  #todo: if ok: rancher-compose up -p $PROJECT -d --confirm-upgrade
   fi
 env:
   global:
