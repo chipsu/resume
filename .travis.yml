@@ -18,8 +18,8 @@ after_success:
   docker push $DOCKER_USERNAME/resume;
   wget -qO- https://github.com/rancher/rancher-compose/releases/download/v0.12.5/rancher-compose-linux-amd64-v0.12.5.tar.xz | tar -xvJ --strip=2
   ./rancher-compose -p $PROJECT up pull --upgrade -d
-  #todo: tests or rancher-compose up -p $PROJECT -d --rollback
-  #todo: if ok: rancher-compose up -p $PROJECT -d --confirm-upgrade
+  echo todo, tests or rancher-compose up -p $PROJECT -d --rollback
+  echo todo if ok, rancher-compose up -p $PROJECT -d --confirm-upgrade
   fi
 env:
   global:
